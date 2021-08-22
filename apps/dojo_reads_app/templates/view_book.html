@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+    <title>{{this_book.title}}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div id='wrapper'>
+        <div class="row">
+            <div class="col-9">
+                <h2>{{this_book.title}}</h2>
+            </div>
+            <div class="col-1">
+                <a href="/dojo">Home</a>
+            </div>
+            <div class="col-1">
+                <a href="/logout">Log out</a>
+            </div>
+        </div>
+        <!-- Reviews for current book -->
+        <div class="row">
+            <div class="col-5 offset-1">
+                <p>{{this_book.author.name}}</p>
+                {% for review in all_reviews %}
+                <div class="col-sm-8">
+                    <div class="row">
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <a href="user/{{review.reviewed_by.id}}"> {{review.reviewed_by.first_name}} </a>
+                        </div>
+                        <div class="col-sm-8">
+                            says : {{review.content}}
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="row">
+                        {{review.rating}}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- Form for adding a review -->
+            <div class="col-5">
+                <form class="form-group" action="{{this_book.id}}/review" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <label for="review" class="col-sm-1 mt-3 form-label fw-bold">Review</label>
+                    <div class="col-sm-8">
+                        <textarea class="col-sm-5 mt-3 form-control" name="review"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="rating" class="col-sm-1 mt-3 fw-bold">Rating</label>
+                    <div class="col-sm-2 mt-3">
+                        <select name="rating" class="form-select">
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                            <option value="4">Four</option>
+                            <option value="5">Five</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2 mt-3">
+                        <p class="fw-bold">Star(s)</p>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-sm col-3 mt-3 offset-3" value="{{this_user.id}}">Submit Review</button>
+                </form>
+            </div>
+        </div>
+            
+    </div>
+</body>
+</html>

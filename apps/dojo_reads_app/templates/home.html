@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+    <title>Dojo Reads</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/dojo_reads.css' %}">
+</head>
+<body>
+    <div id='wrapper'>
+        <div class="row">
+            <div class="col-9">
+                <h2>Welcome: {{this_user.first_name}}!</h2>
+            </div>
+            <div class="col-2">
+                <a href="/dojo/new">Add Book and Review</a>
+            </div>
+            <div class="col-1">
+                <a href="/logout">Log out</a>
+            </div>
+            <div class="row">
+                <div class="col-5 offset-1">
+                    <h3>Recent Book Reviews</h3>
+                    {% for review in recent_reviews %}
+                    <div class="" id='current_reviews'>
+                        <a href="/dojo/{{review.book_reviewed.id}}">{{review.book_reviewed.title}}</a>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                {{review.content}}
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-sm-1 mb-3">
+                                <p>Rating:</p>
+                            </div>
+                            <div class="col-sm-3 mb-3" >
+                                {% if review.rating == 1 %}
+                                <p><span style="color:rgb(0, 243, 0);background-color: black;">&#x272C;</span></p>
+                                {% elif review.rating == 2 %}
+                                <p><span style="color:rgb(0, 243, 0);background-color: black;">&#x272C; &#xa0; &#x272C;</span></p>
+                                {% elif review.rating == 3 %}
+                                <p><span style="color:rgb(0, 243, 0);background-color: black;">&#x272C; &#xa0; &#x272C; &#xa0; &#x272C;</span></p>
+                                {% elif review.rating == 4 %}
+                                <p><span style="color:rgb(0, 243, 0);background-color: black;">&#x272C; &#xa0; &#x272C; &#xa0; &#x272C; &#xa0; &#x272C;</span></p>
+                                {% elif review.rating == 5 %}
+                                <p><span style="color:rgb(0, 243, 0);background-color: black;">&#x272C; &#xa0; &#x272C; &#xa0; &#x272C; &#xa0; &#x272C; &#xa0; &#x272C;</span></p>
+                                {% endif %}
+                            </div>
+                            
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+                <div class="col-5">
+                    <h3>Other Books with Reviews</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

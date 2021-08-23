@@ -38,10 +38,11 @@
         <div class="row">
             
             <h3>Recently Posted reviews</h3>
-            <ul class="col-4" id="review_posts">
+            <ul class="col-4 ms-2" id="review_posts">
                 {% for review in last_three %}
                 <li class="border-top border-3">{{review.book_reviewed.title}} </li>
-                <li class="border-bottom border-3"><div class="col-sm-4 mb-3" >
+                <li class="border-bottom border-3">
+                    <div class="col-sm-4 mb-3 ms-3" >
                     {% if review.rating == 1 %}
                     <p><span class="stars" >&#x272C;</span></p>
                     {% elif review.rating == 2 %}

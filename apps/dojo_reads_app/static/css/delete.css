@@ -1,0 +1,23 @@
+#wrapper{
+    position:relative;
+    min-height:100vh;
+}
+
+#wrapper::after {
+    background-image: url('pexels-frans-van-heerden-caution.jpg');
+    content: "";
+    opacity: .9;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+#delete_box {
+    background-color: yellow;
+    border-radius: 15px;
+    border: 5px solid orangered;
+}
+

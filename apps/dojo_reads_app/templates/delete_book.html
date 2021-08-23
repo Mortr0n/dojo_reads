@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+    <title>Delete {{this_book.title}}?</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/delete.css' %}">
+</head>
+<body>
+    <div id='wrapper'>
+        <div class="row">
+            <div class="col-9">
+                <h2 class="h1 text-danger">Delete {{this_book.title}}?</h2>
+            </div>
+            <div class="col-1">
+                <a href="/dojo">Home</a>
+            </div>
+            <div class="col-1">
+                <a href="/logout">Log out</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5 offset-3" id="delete_box" >
+                <div class="row">
+                    <div class="col-5 offset-3 text-center" >
+                    <p class="h3">Are you sure that you want to delete this book?</p>
+                    <p class="h2 text-danger">{{this_book.title}}</p>
+                </div>
+                
+                <div class="row">
+                    <div class="btn-group col-5 offset-4">
+                        <form class="form-group" action='/dojo/{{this_book.id}}/destroy_book' method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success me-5">Yes!</button>
+                        </form>
+                        <form class="form-group" action='/dojo/{{this_book.id}}' method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Abort!</button>
+                        </form>
+                    </div>
+                   
+                </div>
+               
+            </div>
+        </div>
+    
+    
+    
+    </div>
+</body>
+</html>

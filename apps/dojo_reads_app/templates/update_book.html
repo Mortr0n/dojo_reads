@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+    <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/dojo_reads.css' %}">
+</head>
+<body>
+    <div id='wrapper'>
+        <div class="row">
+            <div class="col-9">
+                <h2>Edit {{this_book.title}}?</h2>
+            </div>
+            <div class="col-1">
+                <a href="/dojo">Home</a>
+            </div>
+            <div class="col-1">
+                <a href="/logout">Log out</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5 offset-1">
+                <form class="form-group" action="/dojo/{{this_book.id}}/update_book" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <label for="title" class="col-sm-2 form-label fw-bold">Title</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="title" value="{{this_book.title}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p class="fw-bold">Author:</p>
+                        <label for="author_select" class="col-sm-3 ms-3 form-label fst-italic">Choose from the
+                            list:</label>
+                        <div class="col-sm-5">
+                            <select name="author_select" class="form-select">
+                                
+                                {% for author in all_authors %}
+                                {{author}}
+                                {{this_book.author}}
+                                {% if author == this_book.author %}
+                                <option value="{{author.id}}" selected='selected'>{{author.name}}</option>
+                                {% else %}
+                                <option value="{{author.id}}">{{author.name}}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+
+                        </div>
+                        <div class="row">
+                            <a href="/dojo/author_show">Or click here to edit an author</a>
+                        </div>
+                        
+                        </div>
+                        <button type="submit" class="btn btn-success btn-sm col-3 mt-3 offset-3" value="{{this_user.id}}">Add Book and Review</button>
+                </form>
+
+    </div>
+</body>
+</html>

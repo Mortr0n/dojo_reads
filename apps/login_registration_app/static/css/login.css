@@ -1,0 +1,21 @@
+.btn-primary {
+    margin: 10px 0 0 0;
+}
+
+#wrapper{
+    position:relative;
+    min-height:100vh;
+}
+
+#wrapper::after {
+    background-image: url('pexels-vladimir-kudinov-ocean.jpg');
+    content: "";
+    opacity: .5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+

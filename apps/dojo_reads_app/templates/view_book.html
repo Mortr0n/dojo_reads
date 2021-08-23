@@ -29,7 +29,7 @@
         <!-- Reviews for current book -->
         <div class="row">
             <div class="col-5 offset-1">
-                <p>{{this_book.author.name}}</p>
+                <p class="h4">Author:  {{this_book.author.name}}</p>
                 {% for review in all_reviews %}
                 <div class="col-sm-8">
                     <div class="row">
@@ -39,7 +39,7 @@
                         <div class="col-sm-1">
                             <a href="user/{{review.reviewed_by.id}}"> {{review.reviewed_by.first_name}} </a>
                         </div>
-                        <div class="col-sm-8">
+                        <div class="col-sm-8 ms-2">
                             says : {{review.content}}
                         </div>
                         
@@ -65,6 +65,19 @@
                     </div>
                 </div>
                 {% endfor %}
+                
+                {% if this_user.id == this_book.added_by.id %}
+                <div class="btn-group">
+                    <form class="form-group" action='{{this_book.id}}/edit_book' method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success me-5">Update</button>
+                    </form>
+                    <form class="form-group" action='{{this_book.id}}/delete_book' method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">delete</button>
+                    </form>
+                </div>
+                {% endif %}
             </div>
             <!-- Form for adding a review -->
             <div class="col-5">

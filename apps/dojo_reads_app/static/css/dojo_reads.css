@@ -33,6 +33,7 @@ p .stars {
     background: rgb(142,137,139);
     background: linear-gradient(139deg, rgba(142,137,139,1) 0%, rgba(237,230,237,1) 42%, rgba(96,97,99,0.804359243697479) 71%);
     border-radius: 25px;
+    list-style-type: none;
 }
 
 #book_ul_color {

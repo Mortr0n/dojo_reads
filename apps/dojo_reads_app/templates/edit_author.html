@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+    <title>Authors</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/dojo_reads.css' %}">
+</head>
+
+<body>
+    <div id='wrapper'>
+        <div class="row">
+            <div class="col-9">
+                <h2>{{this_author.name}}</h2>
+            </div>
+            <div class="col-1">
+                <a href="/dojo">Home</a>
+            </div>
+            <div class="col-1">
+                <a href="/logout">Log out</a>
+            </div>
+        </div>
+        <div class="row">
+            
+                <form class="form-group" action='/dojo/{{this_author.id}}/author_update' method="POST">
+                    {% csrf_token %}
+                    <label for="author" class="col-sm-3 form-label mt-3 ms-3 fst-italic">Edit Author
+                        Name:</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control mt-3" name="author" value="{{this_author.name}}">
+                    </div>
+                    <button type="submit" class="btn btn-success me-5">Edit</button>
+                </form>
+            
+        </div>
+
+
+
+
+    </div>
+</body>
+
+</html>

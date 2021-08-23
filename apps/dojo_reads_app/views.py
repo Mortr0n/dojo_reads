@@ -8,7 +8,7 @@ def index(request):
         return redirect('/')
     # Grabbing the last three books added to the list for the most recent list
     last_three = Review.objects.all().order_by('-created_at')[:3]
-    all_books = Book.objects.all()
+    all_books = Book.objects.all().order_by('-created_at')
     context = {
         'this_user' : User.objects.filter(id=request.session['user_id'])[0],
         'recent_reviews' : last_three,
@@ -50,10 +50,12 @@ def create_book(request):
     return redirect(f'/dojo/{new_book.id}')
 
 def view_book(request, book_id):
+    this_user = User.objects.filter(id=request.session['user_id'])[0]
     this_book = Book.objects.filter(id=book_id)[0]
     context = {
         'this_book' : this_book,
-        'all_reviews' : Review.objects.filter(book_reviewed=this_book)
+        'all_reviews' : Review.objects.filter(book_reviewed=this_book),
+        'this_user' : this_user,
     }
     return render(request, 'view_book.html', context)
 
@@ -81,3 +83,65 @@ def review(request, book_id):
         rating = request.POST['rating']        
     )
     return redirect(f'/dojo/{book_id}')
+
+def edit_book(request, book_id):
+    if 'user_id' not in request.session and request.method != 'POST':
+        return redirect('/')
+    this_user = User.objects.filter(id=request.session['user_id'])[0] #TODO: decide if this is needed at some point
+    this_book = Book.objects.filter(id=book_id)[0] 
+    context = {
+        'this_book' : this_book,
+        'all_authors' : Author.objects.all(),
+    }
+    return render(request, 'update_book.html', context)
+    
+def update_book(request, book_id):
+    if 'user_id' not in request.session and request.method != 'POST':
+        return redirect('/')
+    this_book = Book.objects.filter(id=book_id)[0] 
+    this_author = Author.objects.filter(id=request.POST['author_select'])[0]
+    this_book.title = request.POST['title']
+    this_book.author = this_author
+    this_book.save()
+    return redirect(f'/dojo/{book_id}')
+
+def delete_book(request, book_id):
+    if 'user_id' not in request.session and request.method != 'POST':
+        return redirect('/')
+    this_user = User.objects.filter(id=request.session['user_id'])[0] #TODO: decide if this is needed at some point
+    this_book = Book.objects.filter(id=book_id)[0]
+    context = {
+        'this_book' : this_book,
+    }
+    return render(request, 'delete_book.html', context)
+
+def destroy_book(request, book_id):
+    if 'user_id' not in request.session and request.method != 'POST':
+        return redirect('/')
+    this_book = Book.objects.filter(id=book_id)[0]
+    this_book.delete()
+    return redirect('/dojo')
+
+def author_show(request):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    context = {
+        'all_authors' : Author.objects.all()
+    }
+    return render(request, 'author_list.html', context)
+
+def author_edit(request, author_id):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    context = {
+        'this_author' : Author.objects.filter(id=author_id)[0],
+    }
+    return render(request, 'edit_author.html', context)
+
+def author_update(request, author_id):
+    if 'user_id' not in request.session and request.method != 'POST':
+        return redirect('/')
+    this_author = Author.objects.filter(id=author_id)[0]
+    this_author.name = request.POST['author']
+    this_author.save()
+    return redirect('/dojo/author_show')

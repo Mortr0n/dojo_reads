@@ -4,17 +4,22 @@ Work in progress.  Readme to follow
 <h2 align="center">Page for adding books with reviews.  Including a user manager.</h2>
 <p align="center">
 <h2 align="center">Home page has List of 3 most recent reviews and books from last added on</h2>
-<img src="https://github.com/Mortr0n/books_and_authors/blob/9f1fed79c0b9cf6fe6622d24aace6471b978190d/BookMain.PNG">
+<img src="https://github.com/Mortr0n/dojo_reads/blob/ac7516338060d9cbcf58174d38aeaf5547c084c1/Home.PNG">
 </p>
-<h2 align="center">View a specific book and add or delete contributors</h2>
+<h2 align="center">Add a book and a reveiew.  Choose a current author or add your own</h2>
 <p align="center">
-<img src="https://github.com/Mortr0n/books_and_authors/blob/9f1fed79c0b9cf6fe6622d24aace6471b978190d/bookview.PNG">
+<img src="https://github.com/Mortr0n/dojo_reads/blob/d57f3d4641951154a051ba32f75707275e09f04d/add_a_book.PNG">
 </p>
-<h2 align="center">View a list of authors and add additional authors</h2>
+<h2 align="center">View a specific book and edit or delete if you are the user that added it</h2>
 <p align="center">
-<img src="https://github.com/Mortr0n/books_and_authors/blob/9f1fed79c0b9cf6fe6622d24aace6471b978190d/authormain.PNG">
+<img src="https://github.com/Mortr0n/dojo_reads/blob/d57f3d4641951154a051ba32f75707275e09f04d/book_detail.PNG">
 </p>
-<h2 align="center">View specific information on an author and add or delete books that they wrote</h2>
+<h2 align="center">Update the books info</h2>
 <p align="center">
-<img src="https://github.com/Mortr0n/books_and_authors/blob/9f1fed79c0b9cf6fe6622d24aace6471b978190d/authorview.PNG">
+<img src="https://github.com/Mortr0n/dojo_reads/blob/d57f3d4641951154a051ba32f75707275e09f04d/update_book.PNG">
 </p>
+<h2 align="center">Delete the book prompt</h2>
+<p align="center">
+<img src="https://github.com/Mortr0n/dojo_reads/blob/d57f3d4641951154a051ba32f75707275e09f04d/delete_book.PNG">
+</p>
+<p align="center">Also allows for editing Authors not shown</p>

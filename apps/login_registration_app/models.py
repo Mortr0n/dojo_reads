@@ -12,8 +12,8 @@ class User_Manager(models.Manager):
             errors['first_name'] = 'First name must be at least 2 characters.'
         if len(post_data['last_name']) < 2:
             errors['last_name'] = 'Last name must be at least 2 characters.'
-            if len(post_data['alias']) < 2:
-                errors['alias'] = 'Alias must be at least 2 characters.'
+        if len(post_data['alias']) < 2:
+            errors['alias'] = 'Alias must be at least 2 characters.'
             #check if it's a valid email layout
         if not EMAIL_REGEX.match(post_data['email']):
             errors['email'] = 'Invalid Email address entered.'

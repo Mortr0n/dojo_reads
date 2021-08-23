@@ -2,6 +2,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from apps.login_registration_app.models import User
 from .models import Book, Author, Review
+from django.contrib import messages
 
 def index(request):
     if 'user_id' not in request.session:
@@ -19,6 +20,7 @@ def index(request):
 def new_book(request):
     if 'user_id' not in request.session:
         return redirect('/')
+    
     context = {
         'this_user' : User.objects.filter(id=request.session['user_id'])[0],
         'authors' : Author.objects.all()
@@ -28,6 +30,11 @@ def new_book(request):
 def create_book(request):
     if 'user_id' not in request.session and request.method != 'POST':
         return redirect('/')
+    errors = Book.objects.book_validator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect('/dojo/new')
     this_user = User.objects.filter(id=request.session['user_id'])[0]
     # If theres an author selected go with that one.  If not go with whatever is in the author field
     if request.POST['author_select'] == "none":
@@ -74,10 +81,16 @@ def user(request, users_id):
 def review(request, book_id):
     if 'user_id' not in request.session and request.method != 'POST':
         return redirect('/')
+    errors = Review.objects.review_validator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect(f'/dojo/{book_id}')
+    
     this_user = User.objects.filter(id=request.session['user_id'])[0]
     this_book = Book.objects.filter(id=book_id)[0]
     new_review = Review.objects.create(
-        content = request.POST['review'],
+        content = request.POST['content'],
         reviewed_by = this_user,
         book_reviewed = this_book,
         rating = request.POST['rating']        
@@ -98,6 +111,11 @@ def edit_book(request, book_id):
 def update_book(request, book_id):
     if 'user_id' not in request.session and request.method != 'POST':
         return redirect('/')
+    errors = Book.objects.book_validator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request.value)
+        return redirect(f'/dojo/{book_id}')
     this_book = Book.objects.filter(id=book_id)[0] 
     this_author = Author.objects.filter(id=request.POST['author_select'])[0]
     this_book.title = request.POST['title']
@@ -141,7 +159,14 @@ def author_edit(request, author_id):
 def author_update(request, author_id):
     if 'user_id' not in request.session and request.method != 'POST':
         return redirect('/')
+    errors = Author.objects.author_validator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect(f'/dojo/{author_id}/edit_author')
     this_author = Author.objects.filter(id=author_id)[0]
     this_author.name = request.POST['author']
     this_author.save()
     return redirect('/dojo/author_show')
+
+# TODO: Make Edit and Delete Reviews if the user is the logged in user

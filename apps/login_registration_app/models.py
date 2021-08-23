@@ -12,6 +12,8 @@ class User_Manager(models.Manager):
             errors['first_name'] = 'First name must be at least 2 characters.'
         if len(post_data['last_name']) < 2:
             errors['last_name'] = 'Last name must be at least 2 characters.'
+            if len(post_data['alias']) < 2:
+                errors['alias'] = 'Alias must be at least 2 characters.'
             #check if it's a valid email layout
         if not EMAIL_REGEX.match(post_data['email']):
             errors['email'] = 'Invalid Email address entered.'
@@ -46,6 +48,7 @@ class User_Manager(models.Manager):
 class User(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
+    alias = models.CharField(max_length=255, default='First User!')
     email = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)

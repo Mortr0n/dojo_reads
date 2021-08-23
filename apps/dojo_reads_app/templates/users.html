@@ -11,24 +11,54 @@
         crossorigin="anonymous"></script>
     <title>{{displayed_user.first_name}}'s Profile</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dojo_reads.css' %}">
 </head>
 <body>
     <div id='wrapper'>
         <div class="row">
-            <div class="col-9">
+            <div class="col-8">
                 
             </div>
             <div class="col-1">
                 <a href="/dojo">Home</a>
             </div>
-            <div class="col-1">
+            <div class="col-2">
                 <a href="/dojo/new">Add a Book and Review</a>
             </div>
             <div class="col-1">
                 <a href="/logout">Log out</a>
             </div>
         </div>
+        <div class="row">
+            <h2>User Alias: {{displayed_user.alias}}</h2>
+            <h3>Name: {{displayed_user.first_name}} {{displayed_user.last_name}}</h3>
+            <p>Email: {{displayed_user.email}}</p>
+            <p>Total Reviews: {{displayed_user_reviews.count}}</p>
+        </div>
+        <div class="row">
+            
+            <h3>Recently Posted reviews</h3>
+            <ul class="col-4" id="review_posts">
+                {% for review in last_three %}
+                <li class="border-top border-3">{{review.book_reviewed.title}} </li>
+                <li class="border-bottom border-3"><div class="col-sm-4 mb-3" >
+                    {% if review.rating == 1 %}
+                    <p><span class="stars" >&#x272C;</span></p>
+                    {% elif review.rating == 2 %}
+                    <p><span class="stars">&#x272C;  &#x272C;</span></p>
+                    {% elif review.rating == 3 %}
+                    <p><span class="stars">&#x272C;  &#x272C;  &#x272C;</span></p>
+                    {% elif review.rating == 4 %}
+                    <p><span class="stars">&#x272C;  &#x272C;  &#x272C;  &#x272C;</span></p>
+                    {% elif review.rating == 5 %}
+                    <p><span class="stars">&#x272C;  &#x272C;  &#x272C;  &#x272C; &#x272C;</span></p>
+                    {% endif %}
+                </div> </li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+
     </div>
 </body>
 </html>

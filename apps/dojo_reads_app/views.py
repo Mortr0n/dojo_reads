@@ -8,9 +8,11 @@ def index(request):
         return redirect('/')
     # Grabbing the last three books added to the list for the most recent list
     last_three = Review.objects.all().order_by('-created_at')[:3]
+    all_books = Book.objects.all()
     context = {
         'this_user' : User.objects.filter(id=request.session['user_id'])[0],
         'recent_reviews' : last_three,
+        'all_books' : all_books
     }
     return render(request, 'home.html', context)
 
@@ -56,9 +58,14 @@ def view_book(request, book_id):
     return render(request, 'view_book.html', context)
 
 def user(request, users_id):
+    this_user = User.objects.filter(id=request.session['user_id'])[0]
+    displayed_user = User.objects.filter(id=users_id)[0]
+    last_three = Review.objects.filter(reviewed_by=displayed_user).order_by('-created_at')[:3]
     context = {
-        'this_user' : User.objects.filter(id=request.session['user_id'])[0],
-        'displayed_user' : User.objects.filter(id=users_id)[0]
+        'this_user' : this_user,
+        'displayed_user' : displayed_user,
+        'displayed_user_reviews' : Review.objects.filter(reviewed_by = this_user.id),
+        'last_three' : last_three,
     }
     return render(request, 'users.html', context)
 

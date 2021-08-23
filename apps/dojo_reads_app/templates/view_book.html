@@ -11,7 +11,7 @@
         crossorigin="anonymous"></script>
     <title>{{this_book.title}}</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dojo_reads.css' %}">
 </head>
 <body>
     <div id='wrapper'>
@@ -46,7 +46,22 @@
                         
                     </div>
                     <div class="row">
-                        {{review.rating}}
+                        <div class="col-sm-1 mb-3 me-3">
+                            <p class="mt-3">Rating:</p>
+                        </div>
+                        <div class="col-sm-5 mb-3" >
+                            {% if review.rating == 1 %}
+                            <p><span class="stars">&#x272C;</span></p>
+                            {% elif review.rating == 2 %}
+                            <p><span class="stars">&#x272C; &#x272C;</span></p>
+                            {% elif review.rating == 3 %}
+                            <p><span class="stars">&#x272C; &#x272C; &#x272C;</span></p>
+                            {% elif review.rating == 4 %}
+                            <p><span class="stars">&#x272C; &#x272C; &#x272C; &#x272C;</span></p>
+                            {% elif review.rating == 5 %}
+                            <p><span class="stars">&#x272C; &#x272C; &#x272C; &#x272C; &#x272C;</span></p>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
                 {% endfor %}

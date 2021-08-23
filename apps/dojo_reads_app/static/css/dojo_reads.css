@@ -1,1 +1,47 @@
+#wrapper{
+    position:relative;
+    min-height:100vh;
+}
 
+#wrapper::after {
+    background-image: url('books.jpg');
+    content: "";
+    opacity: .9;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+p .stars {
+    font-size: 35px;
+    color: rgb(189, 8, 189);
+}
+
+#book_scroller {
+    height: 500px;
+    
+}
+
+#white {
+    background-color: white;
+}
+
+#review_posts {
+    background: rgb(142,137,139);
+    background: linear-gradient(139deg, rgba(142,137,139,1) 0%, rgba(237,230,237,1) 42%, rgba(96,97,99,0.804359243697479) 71%);
+    border-radius: 25px;
+}
+
+#book_ul_color {
+    border-radius: 10px;
+    background: rgb(226,158,103);
+background: linear-gradient(139deg, rgba(226,158,103,1) 0%, rgba(238,193,137,1) 42%, rgba(194,141,17,0.804359243697479) 71%);
+}
+
+.review_list_header {
+    background-color: silver;
+    border-radius: 0 5px;
+}

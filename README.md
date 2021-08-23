@@ -1,5 +1,3 @@
-# dojo_reads
-Work in progress.  Readme to follow
 <h1 align="center">Dojo Reads Project </h1>
 <h2 align="center">Page for adding books with reviews.  Including a user manager.</h2>
 <p align="center">

@@ -1,9 +1,9 @@
 # dojo_reads
 Work in progress.  Readme to follow
-<h1 align="center"> Books and Authors Project </h1>
-<h2 align="center">Building blocks for an app with books and authors.</h2>
+<h1 align="center">Dojo Reads Project </h1>
+<h2 align="center">Page for adding books with reviews.  Including a user manager.</h2>
 <p align="center">
-<h2 align="center">View a list of books and add more books</h2>
+<h2 align="center">Home page has List of 3 most recent reviews and books from last added on</h2>
 <img src="https://github.com/Mortr0n/books_and_authors/blob/9f1fed79c0b9cf6fe6622d24aace6471b978190d/BookMain.PNG">
 </p>
 <h2 align="center">View a specific book and add or delete contributors</h2>

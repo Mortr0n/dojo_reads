@@ -26,5 +26,5 @@
 <img src="https://github.com/Mortr0n/dojo_reads/blob/d57f3d4641951154a051ba32f75707275e09f04d/delete_book.PNG">
 </p>
 <p align="center">Also allows for editing Authors not shown</p>
-<p align="center">Coming soon review edit and delete ability for the review owner</p>
+
   

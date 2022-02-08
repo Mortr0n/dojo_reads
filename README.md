@@ -7,8 +7,6 @@
 <h2 align="center">Home page has List of 3 most recent reviews and books from last added on</h2>
 <img src="https://github.com/Mortr0n/dojo_reads/blob/ac7516338060d9cbcf58174d38aeaf5547c084c1/Home.PNG">
 </p>  
-   
-
 
 <h2 align="center">Add a book and a reveiew.  Choose a current author or add your own</h2>
 <p align="center">
